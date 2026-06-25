@@ -29,9 +29,26 @@ That's it — no edit to `aylith-com` is ever needed to add or change a tool.
 
 - **Set `CI_RUNNER`** if the repo has workflows: `ubuntu-latest` for public repos, `self-hosted` for
   private. Public repos must not use the self-hosted runner — see [ci-and-runners.md](ci-and-runners.md).
-- **Carry the handbook pointer** in `CLAUDE.md` (the marked block linking back here). New repos get it
-  via `aylith-handbook/scripts/rollout-claude-pointer.sh`; it's mandatory so any agent finds the
-  handbook at session start.
+- **Add a `CLAUDE.md`** following the structure below — every repo has one.
+
+## What `CLAUDE.md` should contain
+
+Every repo's `CLAUDE.md` follows this shape:
+
+1. `# <Repo> — Claude Code guidance` (H1, first line)
+2. **The handbook pointer block** — mandatory, marker-wrapped (`<!-- aylith-handbook:start -->` …
+   `:end`), right after the H1. It's added and kept in sync by
+   `aylith-handbook/scripts/rollout-claude-pointer.sh`, so any agent finds the handbook at session
+   start. Don't hand-edit the block.
+3. `## Project Overview` — what it is + stack, 2-4 sentences.
+4. `## Commands` — the real install/dev/build/test/lint commands (verify them; don't invent).
+5. `## Architecture` — key directories and how the pieces fit.
+6. `## Conventions` — genuine house rules only (omit the section if none).
+
+Keep it concise — it's read every session: no filler, no historical/migration commentary, no secrets.
+
+**New repo:** run `/init` to generate sections 3-6, then run `rollout-claude-pointer.sh` (or copy the
+block) to insert the pointer. Repos without a `CLAUDE.md` are picked up by the rollout's `/init` pass.
 
 ## Meta repo
 
