@@ -25,6 +25,14 @@ A product repo appears in the catalog automatically. You control how much detail
 
 That's it — no edit to `aylith-com` is ever needed to add or change a tool.
 
+## Every repo (product or meta)
+
+- **Set `CI_RUNNER`** if the repo has workflows: `ubuntu-latest` for public repos, `self-hosted` for
+  private. Public repos must not use the self-hosted runner — see [ci-and-runners.md](ci-and-runners.md).
+- **Carry the handbook pointer** in `CLAUDE.md` (the marked block linking back here). New repos get it
+  via `aylith-handbook/scripts/rollout-claude-pointer.sh`; it's mandatory so any agent finds the
+  handbook at session start.
+
 ## Meta repo
 
 1. **Tag it with the `aylith-meta` GitHub topic** — `gh repo edit aylith-labs/<repo> --add-topic

@@ -1,10 +1,14 @@
 ---
 name: aylith-labs
 description: >-
-  Conventions and architecture for the aylith-labs org. Load before creating a repo in the org,
-  changing the aylith.com catalog, marking a repo as meta/non-product, or making a cross-repo design
-  or data-flow decision. Covers the .aylith/project.md manifest, the aylith-meta exclusion topic, the
-  rebuild notifier, the shared design system, and the role of each meta-repo.
+  Authoritative conventions and architecture for the aylith-labs org. MUST be consulted before any
+  cross-repo, catalog, design-system, CI/runner, or data-flow work in any aylith-labs repo — it is the
+  single source of truth for these decisions, not optional background. Load when creating a repo in the
+  org, changing the aylith.com catalog, marking a repo as meta/non-product, choosing a CI runner or
+  debugging a stuck/queued workflow, reasoning about GitHub Actions minutes/billing, touching the
+  design system, or making a cross-repo data-flow call. Covers the .aylith/project.md manifest, the
+  aylith-meta exclusion topic, the rebuild notifier, the public-vs-self-hosted runner rule, Actions
+  billing, the shared design system, and the role of each meta-repo.
 ---
 
 # Working in aylith-labs
@@ -27,6 +31,9 @@ catalog at aylith.com is *collected* from the product repos — it is not author
    `aylith-brand-mark` skill in `aylith-com`.
 6. **Moving data between repos?** → [docs/data-flow.md](docs/data-flow.md). Catalog (build-time pull),
    hub (runtime Turso push), entity-graph (in-app library) are three separate flows.
+7. **CI, runners, or a stuck workflow / Actions minutes?** → [docs/ci-and-runners.md](docs/ci-and-runners.md).
+   Public repos run on GitHub-hosted, private on self-hosted (`CI_RUNNER`); public repos must never use
+   the self-hosted runner group. A job stuck "queued" on a public repo = it's pinned to self-hosted.
 
 ## Hard rules
 
@@ -35,5 +42,6 @@ catalog at aylith.com is *collected* from the product repos — it is not author
 - Don't duplicate the manifest schema, collector logic, or design tokens here — point to their
   canonical homes (see the README table).
 - aylith.com is static with no backend; don't give it a runtime data source.
+- Public repos run CI on GitHub-hosted only; never put a public repo on the self-hosted runner group.
 
 This handbook is itself a meta-repo (topic `aylith-meta`); it never appears in the catalog.

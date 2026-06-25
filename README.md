@@ -18,6 +18,11 @@ before spinning up a new repo, touching the catalog, or making a cross-repo desi
   across the studio's surfaces.
 - **[Data flow](docs/data-flow.md)** — how data connects: the catalog, the live hub's Turso DB, and
   the shared entity layer.
+- **[CI & runners](docs/ci-and-runners.md)** — which runner each repo uses (public → GitHub-hosted,
+  private → self-hosted), why public repos stay off the self-hosted runner, and Actions-minute limits.
+
+Every repo's `CLAUDE.md` carries a pointer back here — consulting this handbook before cross-repo,
+catalog, design, CI, or data-flow work is **mandatory**, not optional.
 
 ## The one-paragraph model
 
@@ -36,6 +41,7 @@ rebuilds whenever any repo pushes to its default branch.
 | Manifest schema | `aylith-com/.aylith/project.schema.json` |
 | Notifier workflow template | `aylith-com/.aylith/templates/notify-catalog.yml` |
 | Notifier rollout script | `aylith-com/scripts/rollout-notifier.sh` |
+| CLAUDE.md handbook-pointer rollout | `aylith-handbook/scripts/rollout-claude-pointer.sh` |
 | Shared exclusion/default constants | `aylith-com/landing/src/lib/catalog/defaults.js` |
 | Design tokens (live) | `aylith-com/landing/src/app.css` + the `/design` route |
 | Brand mark / wordmark | `aylith-com` → the `aylith-brand-mark` skill |
